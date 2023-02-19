@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>learn svg starting</title>
+  </head>
+  <body>
+    <p>
+      说明： rect 定义矩形、circle 定义圆形、 text 定义文本 这里有一些通用属性：
+      如 width(宽), height（高）, fill（填充颜色）
+    </p>
+
+    <p> &lt;svg>&gt; 为 svg 开始的根元素</p>
+    <svg
+      version="1.1"
+      width="300"
+      height="200"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <!-- rect  定义矩形-->
+      <rect width="100%" height="100%" fill="#f00" />
+      <!-- circle 用来定义一个圆形；(cx,cy) 为圆心； r 为半径 -->
+      <circle cx="150" cy="100" r="80" fill="#0f0" />
+      <!-- (x,y) 定义位置； font-size: 定义字体大小；text-anchor: 定义文本锚点的对齐方式(start 开始对齐、middle 居中对齐、end 末尾对齐) -->
+      <text x="150" y="125" font-size="60" text-anchor="middle" fill="#fff">
+        SVG
+      </text>
+    </svg>
+  </body>
+</html>

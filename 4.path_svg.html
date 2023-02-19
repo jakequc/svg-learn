@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      svg {
+        background-color: aliceblue;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      绘制平滑曲线的命令有三个：
+      其中两个是用来绘制贝塞尔曲线的，另外一个是用来绘制弧形或者说圆形的一部分。
+      在 path 元素里，只存在两种贝塞尔曲线： 三次贝塞尔曲线 C 和 二次贝塞尔曲线
+      Q
+    </p>
+    <svg
+      width="800"
+      height="600"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <!-- <path d="M 10 10 H 90 V 90 H 10 L 10 10" /> -->
+
+      <!-- Z： 闭合曲线命令 -->
+      <!-- <path d="M10 10 H90 V 90 H10 Z" fill="transparent" stroke="black" /> -->
+
+      <!-- 如下路径是： 画笔移动到 (10,10) 点，由此开始，向右移动 80 用户单位 构成一条水平线，然欧向下移动 80 像素，然后向左移动 80 像素，然后再回到起点 -->
+      <path d="M10 10 h 80 v80 h-80 z" fill="transparent" stroke="black" />
+
+      <circle cx="10" cy="10" r="2" fill="#f00" />
+      <circle cx="10" cy="90" r="2" fill="#0f0" />
+      <circle cx="90" cy="90" r="2" fill="#ff0" />
+      <circle cx="90" cy="10" r="2" fill="#233" />
+    </svg>
+    <h2>三次贝塞尔曲线 path 中的 C</h2>
+    <p>
+      三次贝塞尔曲线 C， 三次贝塞尔曲线需要定义一个点和两个控制点，所以用 C
+      命令创建三次贝塞尔曲线，需要设置三组坐标参数
+    </p>
+    <code> C x1 y1, x2, y2, x y or c dx1 dy1, dx2 dy2, dx, dy </code>
+
+    <br />
+    <p>
+      这里的 (x,y)
+      表示的是曲线的终点，另外两个坐标是控制点，（x1,y1）的起点是控制点，（x2,y2）
+      是终点的控制点；
+      控制描述的是曲线起始点的斜率，曲线上各个点的斜率，是从起始斜率到终点斜率的渐变过程
+    </p>
+    <svg
+      width="800"
+      height="600"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M 10 10 C 20 20, 40 20, 50 10"
+        stroke="black"
+        fill="transparent"
+      />
+      <circle cx="10" cy="10" r="2" fill="#f00" />
+
+      <!-- 起点的控制点，控制(10,10) 开始点的斜率 -->
+      <circle cx="20" cy="20" r="2" fill="#0f0" />
+
+      <line x1="10" y1="10" x2="20" y2="20" stroke="red" stroke-width="1" />
+      <!-- 曲线的终点控制点，控制 (50,10) 终点的斜率 -->
+      <circle cx="40" cy="20" r="2" fill="black" />
+      <circle cx="50" cy="10" r="2" fill="orange" />
+      <line x1="40" y1="20" x2="50" y2="10" stroke="purple" stroke-width="1" />
+
+      <path
+        d="M 70 10 C 70 20, 110 20, 110, 10"
+        stroke="black"
+        fill="transparent"
+      />
+      <path
+        d="M 130 10 C 120 20, 180 20, 170, 10"
+        stroke="black"
+        fill="transparent"
+      />
+      <path
+        d="M 10 60 C 70 80, 40 80, 50, 60"
+        stroke="black"
+        fill="transparent"
+      />
+      <path
+        d="M 70 60 C 70 80, 110 80, 110 60"
+        stroke="black"
+        fill="transparent"
+      />
+      <path
+        d="M 130 60 C 120 80, 180 80, 170 60"
+        stroke="black"
+        fill="transparent"
+      />
+      <path
+        d="M 10 110 C 20 140, 40 140, 50 110"
+        stroke="black"
+        fill="transparent"
+      />
+      <path
+        d="M 70 110 C 70 140, 110 140, 110 110"
+        stroke="black"
+        fill="transparent"
+      />
+      <path
+        d="M 130 110 C 120 140, 180 140, 170 110"
+        stroke="black"
+        fill="transparent"
+      />
+
+      <!-- 起点的控制点，控制(10,10) 开始点的斜率 -->
+      <circle cx="130" cy="110" r="2" fill="#f00" />
+
+      <circle cx="120" cy="140" r="2" fill="#0f0" />
+      <!-- 曲线的终点 -->
+      <circle cx="170" cy="110" r="2" fill="orange" />
+    </svg>
+
+    <h2>三次贝塞尔曲线命令 - S</h2>
+    <svg width="190" height="160" xmlns="http://www.w3.org/2000/svg">
+      <!-- （180,80） 为最后一条贝塞尔曲线的 终点 -->
+      <!-- （150，150） 为最后一条贝塞尔曲线的 终点 的控制点 -->
+      <path
+        d="M 10 80 C 40 10, 65 10, 96 80 S 150 150, 180 80"
+        stroke="black"
+        fill="transparent"
+      />
+
+      <circle cx="10" cy="80" r="2" fill="blue" />
+      <circle cx="40" cy="10" r="2" fill="red" />
+
+      <line stroke="red" stroke-width="2" x1="10" y1="80" x2="40" y2="10" />
+
+      <circle cx="65" cy="10" r="2" fill="purple" />
+      <circle cx="96" cy="80" r="2" fill="orange" />
+
+      <line stroke="red" stroke-width="2" x1="65" y1="10" x2="96" y2="80" />
+
+      <circle cx="150" cy="150" r="3" fill="green" />
+      <circle cx="180" cy="80" r="3" fill="blue" />
+      <line stroke="red" stroke-width="3" x1="150" y1="150" x2="180" y2="80" />
+    </svg>
+
+    <h2>二次贝塞尔曲线命令 - Q</h2>
+    <svg width="190" height="160" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 10 80 Q 95 10, 180 80" stroke="black" fill="transparent" />
+      <circle cx="10" cy="80" r="2" fill="purple" />
+      <circle cx="95" cy="10" r="2" fill="purple" />
+      <!-- 控制点 和 起始点的斜率 -->
+      <line x1="10" y1="80" x2="95" y2="10" stroke="orange" stroke-width="1" />
+
+      <circle cx="180" cy="80" r="2" fill="purple" />
+      <!-- 控制点 和 终点的斜率 -->
+      <line x1="180" y1="80" x2="95" y2="10" stroke="purple" stroke-width="1" />
+    </svg>
+
+    <br />
+    <h2>弧形命令 - A</h2>
+    <p>
+      弧形命令A时创建一个 svg 的曲线命令，弧形可以视为 圆形 或者
+      椭圆形的一部分。假设，一直椭圆形的半长轴和短半轴，并且一直两个点（在椭圆上），根据半径和两个点，根据亮点可以画出两种弧线，即仅仅根据半径和亮点，可以画出两种弧线，为了保证创建弧形唯一，A
+      命令有较多的参数：
+      <code> A/a rx ry x-axis-rotation large-arc-flag sweep-falg x y </code>
+      rx 是 x 轴的半径，ry 是 y 轴的半径 ；x-axis-rotation 表示 x 轴的旋转情况;
+      large-arc-flag(角度大小)决定弧线是大于还是小于 180 度，0 表示 小角弧，1
+      表示 大角弧； sweep-flag 表示弧线的方向，
+      0表示从起点开始到终点沿逆时针画弧，1 表示从 起点到终点沿顺时针画弧
+    </p>
+    <svg width="320" height="320" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M 10 315 L 110 215 A 30 50 0 0 1 162.55 162.45 L 172.55 152.45 A 30 50 -45 0 1 215.1 109.9 L 315 10"
+        stroke="black"
+        fill="green"
+        stroke-width="2"
+        fill-opacity="0.5"
+      />
+    </svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="320" height="320">
+      <path
+        d="M 10 315
+            L 110 215
+            A 36 50 0 0 1 150.71 170.29 
+            L 172.55 152.45
+            A 30 50 -45 0 1 215.1 109.9
+            L 315 10"
+        stroke="black"
+        fill="green"
+        stroke-width="2"
+        fill-opaciy="0.5"
+      />
+
+      <circle cx="150.71" cy="170.29" r="2" fill="red" />
+      <circle cx="110" cy="215" r="2" fill="red" />
+      <ellipse
+        cx="114.931"
+        cy="229.512"
+        rx="36"
+        ry="60"
+        fill="transparent"
+        stroke="blue"
+      />
+      <ellipse
+        cx="115.779"
+        cy="115.778"
+        rx="36"
+        ry="60"
+        fill="transparent"
+        stroke="blue"
+      />
+    </svg>
+
+    <h2>
+      large-arc-flag(角度是否大于180) sweep-falg（从起点到终点是否为顺时针）
+    </h2>
+    <svg width="325" height="325" xmlns="http://www.w3.org/2000/svg">
+      <!-- 如下 path 表示： 画笔移动到 (80,80)，画一条 rx=45,ry=45, x 轴旋转方向为 0，小弧度、逆时针方向的圆弧 -->
+      <path
+        d="M 80 80
+                     A 45 45, 1, 0, 0, 100 100
+                     L 125 80 Z"
+        fill="green"
+      />
+      <!-- arc 的终点 位置（此处使用 圆来表示） -->
+      <circle cx="100" cy="100" r="3" fill="black" />
+
+      <!-- 如下 path 表示： 画笔移动到 (230,80)，画一条 rx=45,ry=45, x 轴旋转方向为 0，大弧度、逆时针方向的圆弧 -->
+
+      <path
+        d="M 230 80
+                     A 45 45, 0, 1, 0, 275 125
+                     L 275 80 Z"
+        fill="red"
+      />
+
+      <!-- arc 的终点表示位置 -->
+      <circle cx="230" cy="80" r="3" fill="green" />
+      <!-- arc 的终点 位置（此处使用 圆来表示） -->
+      <circle cx="275" cy="125" r="3" fill="black" />
+
+      <path
+        d="M 80 230
+                     A 45 45, 0, 0, 1, 125 275
+                     L 125 230 Z"
+        fill="purple"
+      />
+      <path
+        d="M 230 230
+                     A 45 45, 0, 1, 1, 275 275
+                     L 275 230 Z"
+        fill="blue"
+      />
+    </svg>
+  </body>
+</html>

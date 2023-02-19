@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>坐标定位</title>
+    <style>
+      svg {
+        background-color: #eee;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="./location.png" alt="" srcset="" />
+    <p>
+      在计算机绘图中，SVG
+      使用的坐标系统如上图所示，左上角(0,0)为坐标原点（和数学老师教的不一样），坐标以像素为单位，x
+      <br />
+      轴定义水平距离，y 轴定义 垂直距 （x,y）定义图形的左上角位置， width\height
+      定义图形的宽高， rx/ry 定义 x，y 方向的圆角半径
+    </p>
+
+    <br />
+    <p>
+      如下 rect 定义了一个矩形，从原点开始，向右沿x轴延伸 100px, 向下沿y轴延伸
+      100px
+    </p>
+    <!-- viewBox="startX startY viewWidth viewHeight" 表示从 (startX,startY) 的坐标位置开始，可见区域为 viewWidth*viewHeight -->
+    <svg width="200" height="200" viewBox="0 0 120 120">
+      <rect x="0" y="0" width="100" height="100" />
+    </svg>
+  </body>
+</html>
