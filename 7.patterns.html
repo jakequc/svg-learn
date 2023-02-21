@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Patterns - 图案</title>
+  </head>
+  <body>
+    <h2>
+      和渐变、style 一样， &lt;pattern&gt; 需要放在 SVG 文档的 &lt;defs&gt; 内部
+    </h2>
+
+    <svg width="200" height="200">
+      <defs>
+        <linearGradient id="Gradient1">
+          <stop offset="5%" stop-color="purple" />
+          <stop offset="95%" stop-color="green" />
+        </linearGradient>
+
+        <linearGradient id="Gradient2" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="5%" stop-color="red" />
+          <stop offset="95%" stop-color="yellow" />
+        </linearGradient>
+
+        <!-- pattern 定义一个模式渲染，相当于将其他的图形结合在了一起，这种定义是放在 defs 实现的， 通过 url(#patternId) 的形式引用 -->
+        <!-- 
+            pattern 属性 patternUnits 用来描述我们使用的属性单元
+            patternUnits 默认值是 objectBoundingBox, 当其值为 1 时，它被缩放并应用到 pattern 对象的宽高度，
+            如果希望 pattern 垂直 和 水平都重复 4 次，pattern 的 width、height 都应该设置为 0.25 (25%) (及 width、height 用来描述 重复下一个图案应该跨过多远，如果你想在绘制的时候设置设置其偏移位置，请使用 x,y)
+        -->
+        <pattern id="Pattern" x="0" y="0" width=".25" height=".25">
+          <!-- 这个相当于定义一个 wrapper 容器 -->
+          <rect x="0" y="0" width="50" height="50" fill="skyblue" />
+          <rect x="0" y="0" width="25" height="25" fill="url(#Gradient2)" />
+          <circle
+            cx="25"
+            cy="25"
+            r="20"
+            fill="url(#Gradient1)"
+            fill-opacity="0.5"
+          />
+        </pattern>
+      </defs>
+
+      <rect
+        fill="url(#Pattern)"
+        stroke="black"
+        x="0"
+        y="0"
+        width="200"
+        height="200"
+      />
+    </svg>
+
+    <h2>
+      如果改变对象的大小，pattern 会自适应大小，但是对象里边的内容不会自适应
+    </h2>
+    <p>
+      因为 pattern 内容与 pattern
+      本身处于相同的单元系统中，所以我们不用偏移边框以使 pattern
+      在正确的位置上开始，并且及时对象变大 ，pattern 也会自动缩放以保证 pattern
+      内部的对象数量和重复不变。 这 与 userSpaceOnUse 系统不同， userSpaceOnUse
+      系统中如果对象改变大小 ，pattern 本身会保持不变，只是重复更多次去填充边框
+      避免在 objectBoundingBox 单元中绘制图形，因为这样可以会出现某些 bug
+    </p>
+
+    <svg width="200" height="200">
+      <defs>
+        <linearGradient id="Gradient1">
+          <stop offset="5%" stop-color="purple" />
+          <stop offset="95%" stop-color="green" />
+        </linearGradient>
+
+        <linearGradient id="Gradient2">
+          <stop offset="5%" stop-color="red" />
+          <stop offset="95%" stop-color="yello" />
+        </linearGradient>
+
+        <pattern
+          id="Pattern"
+          width=".25"
+          height=".25"
+          patterContentUnits="objectBoundingBox"
+        >
+          <rect x="0" y="0" width=".25" height=".25" fill="skyblue" />
+          <rect x="0" y="0" width=".125" height=".125" fill="url(#Gradient2)" />
+          <circle
+            cx=".125"
+            cy=".125"
+            r=".1"
+            fill="url(#Gradient1)"
+            fill-opacity="0.5"
+          />
+        </pattern>
+      </defs>
+
+      <rect
+        fill="url(#Pattern)"
+        stoke="black"
+        x="0"
+        y="0"
+        width="200"
+        height="200"
+      />
+    </svg>
+  </body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>填充和边框</title>
+    <style>
+      svg {
+        background: #eee;
+      }
+    </style>
+  </head>
+  <body>
+    <p>可以使用 内联 CSS 样式、内嵌 CSS 样式、或者外部 CSS 样式文件</p>
+
+    <h1>fill 设置对象内部的颜色， stroke 绘制对象的线条颜色</h1>
+    <p>
+      颜色可以是使用 颜色名字 red, rgb\rgba,十六进制等等合法的颜色值,
+      fill-opacity & stroke-opacity 可以用来设置 对应颜色的不透明度
+    </p>
+    <svg>
+      <rect
+        x="10"
+        y="10"
+        width="100"
+        height="100"
+        stroke-width="2"
+        stroke="red"
+        fill="purple"
+        fill-opacity="0.5"
+        stroke-opacity="0.8"
+      />
+    </svg>
+
+    <h1>stroke-linecap 用来控制描边的方式，他控制边框终点的形状</h1>
+    <p>
+      butt
+      用直边结束线段，线段边界90度垂直于描边的方向、贯穿他的终点（粗图线条） ；
+      square（平方线条）；round 边框是圆角的，圆角的半径有 stroke-width 控制
+    </p>
+    <svg>
+      <line
+        x1="40"
+        x2="120"
+        y1="20"
+        y2="20"
+        stroke="black"
+        stroke-width="20"
+        stroke-linecap="butt"
+      />
+      <line
+        x1="40"
+        x2="120"
+        y1="60"
+        y2="60"
+        stroke="black"
+        stroke-width="20"
+        stroke-linecap="square"
+      />
+      <line
+        x1="40"
+        x2="120"
+        y1="100"
+        y2="100"
+        stroke="black"
+        stroke-width="20"
+        stroke-linecap="round"
+      />
+    </svg>
+
+    <h1>stroke-linejoin 用来控制描边的方式，他控制边框终点的形状</h1>
+    <p>miter 默认值，直角连接； round 圆角连接 bevel 斜面连接</p>
+    <svg
+      width="160"
+      height="280"
+      xmlns="http://www.w3.org/2000/svg"
+      version="1.1"
+    >
+      <polyline
+        points="40 60, 80 20, 120 60, 150 0"
+        stroke="black"
+        stroke-width="20"
+        stroke-linecap="butt"
+        fill="none"
+        stroke-linejoin="miter"
+      />
+
+      <polyline
+        points="40 140, 80 100, 120, 140, 150 140"
+        stroke="black"
+        stroke-width="20"
+        stroke-linecap="round"
+        fill="none"
+        stroke-linejoin="round"
+      />
+
+      <polyline
+        points="40 220, 80 180, 120 220, 150 220"
+        stroke="black"
+        stroke-width="20"
+        stroke-liinecap="square"
+        fill="none"
+        stroke-linejoin="bevel"
+      />
+    </svg>
+
+    <h2>
+      stroke-dasharray="areaLen1 areaLen2 areaLen3" 可以将虚线类型应用在锚边上
+    </h2>
+    <svg
+      width="200"
+      height="150"
+      xmlns="http://www.w3.org/2000/svg"
+      version="1.1"
+    >
+      <!-- Q 定义 一个 二次 贝塞尔曲线， T 定义了 曲线的 最终位置 -->
+      <path
+        d="M 10 75 Q 50 10 100 75 T 190 75"
+        stroke="black"
+        stroke-linecap="round"
+        stroke-dasharray="5,10,5"
+        fill="none"
+      />
+      <path
+        d="M 10 75 L 190 75"
+        stroke="red"
+        stroke-linecap="round"
+        stroke-dasharray="5,5"
+        fill="none"
+      />
+    </svg>
+
+    <h2>CSS 可以利用 style 属性 插入到元素的行间：</h2>
+    <svg
+      width="200"
+      height="150"
+      xmlns="http://www.w3.org/2000/svg"
+      version="1.1"
+    >
+      <rect
+        x="10"
+        height="180"
+        y="10"
+        width="180"
+        style="stroke: black; fill: red"
+      />
+    </svg>
+    <h2>
+      在 &lt; style &gt; 设置 svg 样式， 只是 HTML 的 style tag 是放在 head
+      里边的； 在 svg 的 style 是放在 devs 标签的
+    </h2>
+    <svg
+      width="200"
+      height="150"
+      xmlns="http://www.w3.org/2000/svg"
+      version="1.1"
+    >
+      <defs>
+        <style>
+          #myRectSvg {
+            stroke: black;
+            fill: red;
+          }
+
+          #myRectSvg:hover {
+            stroke: black;
+            fill: blue;
+          }
+        </style>
+      </defs>
+
+      <rect x="10" height="180" y="10" width="180" id="myRectSvg" />
+    </svg>
+  </body>
+</html>

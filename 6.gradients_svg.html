@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gradients - 渐变</title>
+  </head>
+  <body>
+    <h2>
+      渐变有两种类型： 线性渐变 和 径向渐变； 必须给渐变的内容指定一个 id
+      属性，否则文档内的其他元素就不能引用它，为了让渐变能够被重复使用，渐变内容需要定义在
+      &lt; defs &gt; 标签内部
+    </h2>
+
+    <h3>linearGradient 线性渐变</h3>
+    <p>
+      线性渐变沿着直线改变颜色，要插入一个线性渐变，需要在 svg 文件的 defs
+      元素内部创建 linearGradient 节点
+    </p>
+    <svg
+      width="120"
+      height="240"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <linearGradient id="Gradient1">
+          <stop class="stop1" offset="0%" />
+          <stop class="stop2" offset="50%" />
+          <stop class="stop3" offset="100%" />
+        </linearGradient>
+
+        <linearGradient id="Gradient2" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stop-color="red" />
+          <stop offset="50%" stop-color="black" stop-opacity="0.5" />
+          <stop offset="100%" stop-color="blue" />
+        </linearGradient>
+
+        <style type="text/css">
+          #rect1 {
+            fill: url(#Gradient1);
+          }
+          .stop1 {
+            stop-color: red;
+          }
+          .stop2 {
+            stop-color: black;
+            stop-opacity: 0;
+          }
+          .stop3 {
+            stop-color: blue;
+          }
+        </style>
+      </defs>
+
+      <rect id="rect1" x="10" y="10" rx="15" ry="15" width="100" height="100" />
+      <rect
+        x="10"
+        y="120"
+        rx="15"
+        ry="15"
+        width="100"
+        height="100"
+        fill="url(#Gradient2)"
+      />
+    </svg>
+    <h2>
+      通过 xlink:href 属性
+      引用另外一个渐变，如果使用了该属性时，一个渐变的属性和颜色中值(stop)
+      可以被另一个渐变包含引用
+    </h2>
+    <svg
+      width="120"
+      height="240"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <linearGradient id="Gradient1">
+          <stop id="stop1" offset="0%" />
+          <stop id="stop2" offset="50%" />
+          <stop id="stop3" offset="100%" />
+        </linearGradient>
+
+        <linearGradient
+          id="Gradient2"
+          x1="0"
+          x2="0"
+          y1="0"
+          y2="1"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xlink:href="#Gradient1"
+        />
+
+        <!-- <style type="text/css">
+          #rect1 {
+            fill: url(#Gradient1);
+          }
+          #stop1 {
+            stop-color: red;
+          }
+          #stop2 {
+            stop-color: black;
+            stop-opacity: 0;
+          }
+          #stop3 {
+            stop-color: blue;
+          }
+        </style> -->
+      </defs>
+
+      <rect id="rect1" x="10" y="10" rx="15" ry="15" width="100" height="100" />
+      <rect
+        x="10"
+        y="120"
+        rx="15"
+        ry="15"
+        width="100"
+        height="100"
+        fill="url(#Gradient2)"
+      />
+    </svg>
+
+    <h2>径向渐变 - radialGradient</h2>
+    <svg
+      width="120"
+      height="240"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <radialGradient id="RadialGradient1">
+          <stop offset="0%" stop-color="red" />
+          <stop offset="100%" stop-color="blue" />
+        </radialGradient>
+
+        <radialGradient id="RadialGradient2" cx="0.25" cy="0.25" r="0.25">
+          <stop offset="0" stop-color="red" />
+          <stop offset="1" stop-color="blue" />
+        </radialGradient>
+      </defs>
+
+      <rect
+        x="10"
+        y="10"
+        rx="15"
+        ry="15"
+        width="100"
+        height="100"
+        fill="url(#RadialGradient1)"
+      />
+      <rect
+        x="10"
+        y="120"
+        rx="15"
+        ry="15"
+        width="100"
+        height="100"
+        fill="url(#RadialGradient2)"
+      />
+    </svg>
+    <h3>
+      径向渐变 - radialGradient - （cx,cy） 属性定义了中心点， r 定义半径，
+      (fx,fy) 定义焦点
+    </h3>
+    <p>
+      (cx,cy) 定义了中心点，用来描述渐变边缘位置，(fx,fy)[渐变焦点]
+      用来描述了渐变的中心
+    </p>
+    <svg width="120" height="120">
+      <defs>
+        <radialGradient
+          id="Gradient"
+          cx="0.5"
+          cy="0.5"
+          r="0.5"
+          fx="0.25"
+          fy="0.25"
+        >
+          <stop offset="0%" stop-color="red" />
+          <stop offset="100%" stop-color="blue" />
+        </radialGradient>
+      </defs>
+
+      <rect
+        x="10"
+        y="10"
+        rx="15"
+        ry="15"
+        width="100"
+        height="100"
+        fill="url(#Gradient)"
+        stroke="black"
+        stroke-width="2"
+      />
+      <circle
+        cx="60"
+        cy="60"
+        r="50"
+        fill="transparent"
+        stroke="white"
+        stroke-width="2"
+      />
+      <circle cx="35" cy="35" r="2" fill="white" stroke="white" />
+      <circle cx="60" cy="60" r="2" fill="white" stroke="white" />
+      <text
+        x="38"
+        y="40"
+        fill="white"
+        font-family="sans-serif"
+        font-size="10pt"
+      >
+        (fx,fy)
+      </text>
+      <text
+        x="63"
+        y="63"
+        fill="white"
+        font-family="sans-serif"
+        font-size="10pt"
+      >
+        (cx,cy)
+      </text>
+    </svg>
+
+    <h3>线性渐变和径向渐变的公共属性- spreadMethod： 控制渐变达到终点的心给</h3>
+    <p>
+      spreadMethod 有三个值 pad, reflect, repeat <br />
+      pad: 当渐变达到终点是，最终的偏移颜色用于填充对象的剩下空间
+      <br />
+      reflect: 会让渐变一直持续下去，不过它的效果是与渐变本身相反的， 100%
+      为偏移位置的颜色开始，逐渐偏移到 0% 位置的颜色，然后在回到 100%
+      偏移位置的颜色
+      <br />
+      repeat:
+      也会让渐变颜色继续，但是不会反向渐变，而是回到最初的颜色然后继续渐变
+    </p>
+    <svg width="220" height="220">
+      <defs>
+        <radialGradient
+          id="GradientPad"
+          cx="0.5"
+          cy="0.5"
+          r="0.4"
+          fx="0.75"
+          fy="0.75"
+          spreadMethod="pad"
+        >
+          <stop offset="0%" stop-color="red" />
+          <stop offset="100%" stop-color="blue" />
+        </radialGradient>
+
+        <radialGradient
+          id="GradientRepeat"
+          cx="0.5"
+          cy="0.5"
+          r="0.4"
+          fx="0.75"
+          fy="0.75"
+          spreadMethod="repeat"
+        >
+          <stop offset="0" stop-color="red" />
+          <stop offset="1" stop-color="blue" />
+        </radialGradient>
+
+        <radialGradient
+          id="GradientReflect"
+          cx="0.5"
+          cy="0.5"
+          r="0.4"
+          fx="0.75"
+          fy="0.75"
+          spreadMethod="reflect"
+        >
+          <stop offset="0" stop-color="red" />
+          <stop offset="1" stop-color="blue" />
+        </radialGradient>
+      </defs>
+
+      <rect
+        x="10"
+        y="10"
+        rx="15"
+        ry="15"
+        width="100"
+        height="100"
+        fill="url(#GradientPad)"
+      />
+      <rect
+        x="10"
+        y="120"
+        rx="15"
+        ry="15"
+        width="100"
+        height="100"
+        fill="url(#GradientRepeat)"
+      />
+      <rect
+        x="120"
+        y="120"
+        rx="15"
+        ry="15"
+        width="100"
+        height="100"
+        fill="url(#GradientReflect)"
+      />
+
+      <text
+        x="15"
+        y="30"
+        fill="white"
+        font-family="sans-serif"
+        font-size="12pt"
+      >
+        Pad
+      </text>
+      <text
+        x="15"
+        y="140"
+        fill="white"
+        font-family="sans-serif"
+        font-size="12pt"
+      >
+        Repeat
+      </text>
+      <text
+        x="125"
+        y="140"
+        fill="white"
+        font-family="sans-serif"
+        font-size="12pt"
+      >
+        Reflect
+      </text>
+    </svg>
+  </body>
+</html>
