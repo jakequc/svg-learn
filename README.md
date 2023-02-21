@@ -6,9 +6,12 @@ This is the repository I used to learn svg
 
 - svg 文件的规则是“后来居上”，越后面的元素越可见
 - web 上的 svg 文件可以直接在浏览器上展示，或者通过以下几种方法嵌入到 HTML 文件中：
+
   - 如果 HTML 的 XMHTL 并且声明类型为 application/xhtml+xml, 可直接把 svg 嵌入到 XML 源码中
   - 可以通过 object、iframe、img 元素中引入 svg 文件
   - svg 可以通过 js 动态常见并注入到 HTML DOM 中，这样可以对浏览器使用替换技术，在不能解析 svg 的情况下，替换创建的内容
+
+- viewBox="min-x min-y width height" 在用户空间置顶一个区域映射到给定元素
 
 ```code
 <object data="image.svg" type="image/svg+xml"/>
@@ -346,3 +349,65 @@ rx 设置 椭圆的 x 半径（长轴半径）， ry 设置椭圆的 y 半径(�
   - width、height 的百分比形式用于设置 水平和垂直距离 的次数（.25 表示重复 4 次）
   - x、y 设置 pattern 的偏移量
   - patternContentUnits 描述 pattern 元素基于形状使用的单元系统，这个属性默认值 为 userSpaceOnUse
+
+#### text 文本
+
+- text 的常见属性
+  - x，y 决定了 文本 显示的位置
+  - text-anchor: "start" | "middle" | "end" | "inherit" 设置文本流的方向
+  - fill 文本填充颜色
+  - stroke 给文本描边，形状元素和文本元素都可以引用渐变或图案。
+  - font-family: 设定字体类型
+  - font-style: "normal" | "italic" | "oblique" 等字体样式
+  - font-weight 设置字体的粗细程度
+    等 css 属性
+
+##### 文本相关的元素
+
+###### tspan 用来标记大块文本的子部分
+
+```code
+ <text>
+  <tspan font-weight="bold" fill="red">This tspan text</tspan>
+ </text>
+```
+
+- tspan 的自定义属性
+  - x 为 tspan 设置一个绝对 x 坐标，可以覆盖默认当前的文本位置，这个属性可以包含一个数列，它们将一个个地应用到 tspan 元素内的每一个字符上
+  - dx：从当前位置，用一个水平偏移开始绘制文本，如果是一个数列值，可以应用到连续的字体，因此每次累计一个偏移
+  - y： 为 tspan 设置一个绝对 y 坐标
+  - dy 设置垂直偏移量
+  - rotate 把所有的字符旋转到一个角度，如果是一个数列，则使每个字符旋转分别旋转到那个值，身下的字符根据最后一个值旋转
+  - textLength 给出字符串的计算长度，它以为这如果它自己的度量文字和长度不满足这个提供的值，则允许渲染引擎精细调整字型的位置
+
+###### tref 引用已经定义的文本，结合 id 和 xlink:href 属性
+
+```code
+<text id="example">This is an example text.</text>
+
+<text>
+  <tref xlink:href="#example"/>
+</text>
+```
+
+###### textPath 使得字体按照 path 定义来走
+
+```code
+<path id="my_path" d="M 20, 20 C 40,40 80,40 100,20" fill="transparent"/>
+
+<text>
+  <textPath xlink:href="#my_path">
+    text Path fllow xlink href path
+  </textPath>
+</text>
+```
+
+#### transform 变换属性
+
+transform 可以对指定的元素进行转换，常见的值有 (transform="xxx")
+
+- translate(x,y=0) 将元素从定义的点移动到 (x,y) 点
+- rotate(deg) 使元素旋转 deg 度
+- skewX(deg) or skewY(deg) 使元素在 x 轴 或者 y 轴 旋转 deg 度
+- scale(multiple) 使元素放大 multiple 倍
+- matrix(a,b,c,d,e,f) 这个元素可以实现如上变形
