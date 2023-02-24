@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>image \ foreignObject</title>
+  </head>
+  <body>
+    <div>
+      除了 rect, cricle, line, polyline, ellipse 等元素外， SVG
+      还提供了一些元素用来在图片中嵌入别的类型内容
+    </div>
+
+    <h2>
+      嵌入光栅图像 image(类似于 html 中的
+      img),它可以嵌入任意光栅（以及矢量）图像（png, jpg, svg 格式的文件）
+    </h2>
+    <div>
+      嵌入的图像变成一个普通的 svg 元素，因此你可以在其内容上使用
+      clipPath，mask, transform 等操作
+    </div>
+
+    <svg
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      width="200"
+      height="200"
+    >
+      <image
+        x="90"
+        y="-65"
+        width="128"
+        height="146"
+        transform="rotate(45)"
+        xlink:href="https://t7.baidu.com/it/u=2531125946,3055766435&fm=193&f=GIF"
+      />
+    </svg>
+
+    <h2>嵌入 任意 XML</h2>
+    <div>
+      因为 SVG 是一个 XML 应用，所以可以在 SVG 文档中 嵌入 任意 XML ， SVG
+      中有一个标签 &lt; foreignObject 元素，它唯一的目的是作为 其他标记的容器 和
+      SVG 样式属性的载体（更突出的 width 和 height 用来定义该对象占用的空间）
+    </div>
+    <p>
+      foreignObject 元素用来 在 SVG 中嵌入 XHTML， 该 HTML 布局比 SVG 的 text
+      元素更适合，另一个经常被引用的用例是用 MathML 写的，对于 SVG 的科学应用，
+      它是 连接两个 世界的一个好方法 记住，foreignObject 元素的内容是能被 浏览器
+      加工的，一个独立的 SVG 浏览器不太可能呈现 HTML 或 MathML。 因为
+      foreignObject 是一个 SVG 元素， 所以你可以像用图像那样，使用任何 SVG
+      的特性，它们将被一个应用到 foreignObject 内容上
+    </p>
+  </body>
+</html>

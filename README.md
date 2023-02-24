@@ -411,3 +411,64 @@ transform 可以对指定的元素进行转换，常见的值有 (transform="xxx
 - skewX(deg) or skewY(deg) 使元素在 x 轴 或者 y 轴 旋转 deg 度
 - scale(multiple) 使元素放大 multiple 倍
 - matrix(a,b,c,d,e,f) 这个元素可以实现如上变形
+
+#### 使用 defs 中定义的额 clipPath 来将元素进行剪切
+
+```code
+<svg
+      version="1.1"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <clipPath id="cut-off-bottom">
+          <rect x="0" y="0" width="200" fill="red" height="100" />
+        </clipPath>
+      </defs>
+
+      <!-- clip-path 会引用一个 被定义在 clipPath 中的元素， 这个元素将会作为一个剪切画布 -->
+      <circle
+        cx="100"
+        cy="100"
+        r="100"
+        fill="green"
+        clip-path="url(#cut-off-bottom)"
+      />
+      <circle cx="100" cy="100" r="2" fill="red" />
+    </svg>
+```
+
+#### mask 定义一个遮罩
+
+```code
+
+    <svg>
+      <defs>
+        <linearGradient id="Gradient">
+          <!-- offset=0 表示开始位置， offset=1 表示结束位置 -->
+          <stop offset="0" stop-color="white" stop-opacity="0" />
+          <stop offset="1" stop-color="white" stop-opacity="1" />
+        </linearGradient>
+
+        <!-- mask 遮罩被定义在 defs 里边 -->
+        <mask id="Mask">
+          <rect x="0" y="0" width="200" height="200" fill="url(#Gradient)" />
+        </mask>
+      </defs>
+
+      <rect x="0" y="0" width="200" height="200" fill="green" />
+      <rect x="0" y="0" width="200" height="200" fill="red" mask="url(#Mask)" />
+    </svg>
+```
+
+#### 不透明度的设置
+
+- opacity 用来控制整个元素的透明度
+- fill-opacity 用来控制填充颜色的不透明度
+- stroke-opacity 用来控制描边的不透明度
+
+⚠️： 描边 绘制在填充上边，因此在一个元素设置了描边透明度，但它同时设有填充，则描边的一半应用填充色，另一半将应用背景色(fill)
+
+#### CSS 上的属性可以应用到 SVG 上
+
+比如 display:one ，visibility 和 clip 属性，都可以应用到 SVG 上，SVG 元素的初始化 display 值都为 inline
