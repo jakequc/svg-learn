@@ -472,3 +472,5 @@ transform 可以对指定的元素进行转换，常见的值有 (transform="xxx
 #### CSS 上的属性可以应用到 SVG 上
 
 比如 display:one ，visibility 和 clip 属性，都可以应用到 SVG 上，SVG 元素的初始化 display 值都为 inline
+
+#### 可以使用 filter 来为 元素加上 过滤

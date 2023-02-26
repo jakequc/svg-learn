@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SVG 中的 image 元素</title>
+  </head>
+  <body>
+    <div>
+      SVG 的 &lt;image&gt; 元素允许在一个 SVG 对象内部呈现光栅图像；
+      xlink:href(url) 引入一个 image 图像来源
+    </div>
+
+    <svg
+      width="5cm"
+      height="4cm"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+    >
+      <!-- 如果没有设置 x,y，height，width 属性，它们自动被设置为 0 -->
+      <!-- 如果 width or height 等于 0 将不会呈现这个图像 -->
+      <image
+        xlink:href="./location.png"
+        x="0"
+        y="0"
+        height="200px"
+        width="200px"
+      />
+    </svg>
+  </body>
+</html>

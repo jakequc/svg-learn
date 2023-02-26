@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SVG 字体</title>
+    <style>
+      /* 使用 CSS @font-face 引用字体 */
+      @font-face {
+        font-family: "Super Sans";
+        src: url(#Super_Sans);
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      svg 字体 当前只在 Safari 和 Android
+      浏览器收到支持，因此使用的时候需要考虑其兼容性
+    </p>
+
+    <h2>定义一个字体</h2>
+    <object data="./svg_font.svg" type="image/svg+xml"></object>
+    <svg>
+      <!-- 引用一个字体 -->
+      <!-- 使用 font-family 属性可以实现 SVG 文本上的应用字体 -->
+      <text font-family="Super Sans">My text uses Super Sans</text>
+    </svg>
+  </body>
+</html>

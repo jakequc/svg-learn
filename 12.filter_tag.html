@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Filter 滤镜</title>
+  </head>
+  <body>
+    <div>
+      Filter 是 SVG 中的滤镜效果 滤镜通过 &lt; filter &gt; 元素进行定义（在 defs
+      标签中定义） 在 filter
+      标签中提供了一系列图元（primitives），以及在前一个基础变换操作上建立的另一个操作(比如先模糊后高亮)
+      如果元素要使用滤镜效果，只需要为 SVG 图形 元素设置 filter 属性即可
+    </div>
+    <svg
+      width="250"
+      viewBox="0 0 200 85"
+      xmlns="http://www.w3.org/2000/svg"
+      version="1.1"
+    >
+      <defs>
+        <!-- Filter declaration -->
+        <filter
+          id="MyFilter"
+          fiilterUnits="userSpaceOnUse"
+          x="0"
+          y="0"
+          width="200"
+          height="120"
+        >
+          <!-- feGuassianBlur 高斯模糊 中 in 属性为 SourceAlpha， 即原图像的 alpha 通道， 并设置了模糊度为 4，并把 result 保存在了一个 名为 "blur" 的临时缓冲区中 -->
+          <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur" />
+
+          <!-- feOffset 设置 in 的值为 "blur", 即前一个 GaussianBlur 保存  result 的那个临时缓冲区。然后设置相对坐标，向右偏移 4， 向下偏移 4 ，最后把 结果 result 保存到名为 offsetBlur 的缓冲区中-->
+          <feOffset in="blur" dx="4" dy="4" result="offsetBlur" />
+
+          <!-- feSpecularLighting 设置输入源 in 为 blur 将会僧成一个光照效果，并将结果 result 保存在 specOut 中 -->
+          <feSpecularLighting
+            in="blur"
+            surfaceScale="5"
+            specularConstant=".75"
+            specularExponent="20"
+            lighting-color="#bbbbbb"
+            result="specOut"
+          >
+            <fePointLight x="-5000" y="-10000" z="20000" />
+          </feSpecularLighting>
+
+          <!-- 
+             feCompposite 元素设置输入源 为 specOut，
+             第二个输入源(in2)为 "SourceAlpha"，
+             将 "specOut" 的结果效果遮盖掉，
+             以至于最后的结果不会大于 SourceAlpha （源图像）,
+             最后覆盖输出结果 result 为 "sepecOut"
+          -->
+          <feComposite
+            in="specOut"
+            in2="SourceAlpha"
+            operator="in"
+            result="specOut"
+          />
+          <!-- feComposite 设置 in 为 SourceGraphic 和 specOut，
+            即在 “SourceGraphic” 之上添加 "specOut" 的效果，
+            复合模式为 arithmetic，然后保存结果 result 为 litPaint
+            -->
+          <feComposite
+            in="SourceGraphic"
+            in2="specOut"
+            operator="arithmetic"
+            k1="0"
+            k2="1"
+            k3="1"
+            k4="0"
+            result="litPaint"
+          />
+
+          <!-- feMerge 元素合并了 阴影效果 offsetBlur 和 源图像光照效果 litPaint -->
+          <feMerge>
+            <feMergeNode in="offsetBlur" />
+            <feMergeNode in="litPaint" />
+          </feMerge>
+        </filter>
+      </defs>
+
+      <!-- 引入 过滤的 url 来源 以及作用的对象 -->
+      <g filter="url(#MyFilter)">
+        <path
+          fill="none"
+          stroke="red"
+          stroke-width="10"
+          d="M50 66 c-50 0 -50 -60 0 -60 h100 c50 0 50  60 0 60 z "
+        />
+        <path
+          fill="red"
+          d="M60 56 c-30 0 -30 -40 0 -40 h80 c30 0 30 40 0 40z"
+        />
+        <g fill="#FFFFFF" stroke="black" font-size="45" font-family="Verdana">
+          <text x="52" y="52">SVG</text>
+        </g>
+      </g>
+    </svg>
+  </body>
+</html>
