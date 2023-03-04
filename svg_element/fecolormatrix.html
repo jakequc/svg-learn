@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>feColorMatrix</title>
+    <style>
+      svg {
+        background-color: #eee;
+        overflow: scroll;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      &lt;feColorMatrix&gt; SVG 过滤元素根据 转换矩阵 改变颜色，每一个 颜色
+      [R,G,B,A] 乘以 5*5 的颜色矩阵来创建一个 新的 颜色组 [R',G',B',A']
+    </p>
+    <img src="./colorMatrix.png" alt="" srcset="" />
+    <br />
+
+    <svg
+      width="100%"
+      height="100%"
+      viewBox="0 0 150 500"
+      preserveAspectRatio="xMidYmid meet"
+    >
+      <defs>
+        <!-- 这里定义了一个组，组的id 为 circles -->
+        <g id="circles">
+          <circle cx="30" cy="30" r="20" fill="blue" fill-opacity="0.5" />
+          <circle cx="20" cy="50" r="20" fill="green" fill-opacity="0.5" />
+          <circle cx="40" cy="50" r="20" fill="red" fill-opacity="0.5" />
+        </g>
+      </defs>
+
+      <!-- 使用一个定义好的资源，#id -->
+      <use href="#circles" />
+
+      <text x="70" y="50">Reference</text>
+
+      <!-- identity matrix -->
+      <filter id="colorMeTheSame">
+        <feColorMatrix
+          in="SourceGraphic"
+          type="matrix"
+          values="
+            1 0 0 0 0
+            0 1 0 0 0 
+            0 0 1 0 0 
+            0 0 0 1 0 "
+        />
+      </filter>
+
+      <use
+        href="#circles"
+        transform="translate(0 70)"
+        filter="url(#colorMeTheSame)"
+      />
+      <text x="70" y="120">Identity matrix</text>
+
+      <!-- 结合 RGB 到 绿色矩阵中 -->
+      <filter id="colorMeGreen">
+        <feColorMatrix
+          in="SourceGraphic"
+          type="matrix"
+          values="
+            0 0 0 0 0
+            1 1 1 1 0
+            0 0 0 0 0
+            0 0 0 1 0
+          "
+        />
+      </filter>
+
+      <use
+        href="#circles"
+        transform="translate(0 140)"
+        filter="url(#colorMeGreen)"
+      />
+      <text x="70" y="190">rgbToGreen</text>
+
+      <!-- saturate 饱和-->
+      <filter id="colorMeSaturate">
+        <feColorMatrix in="SourceGraphic" type="saturate" values="0.2" />
+      </filter>
+
+      <use
+        href="#circles"
+        transform="translate(0 210)"
+        filter="url(#colorMeSaturate)"
+      />
+      <text x="70" y="260">saturate</text>
+
+      <!-- hueRotate -->
+      <filter id="colorMeHueRotate">
+        <feColorMatrix in="SourceGraphic" type="hueRotate" values="180" />
+      </filter>
+
+      <use
+        href="#circles"
+        transform="translate(0 280)"
+        filter="url(#colorMeHueRotate)"
+      />
+      <text x="70" y="330">hueRotate</text>
+
+      <!-- luminanceToAlpha -->
+      <filter id="colorMeLTA">
+        <feColorMatrix in="SourceGraphic" type="luminaceToAlpha" />
+      </filter>
+
+      <use
+        href="#circles"
+        transform="translate(0 350)"
+        filter="url(#colorMeLTA)"
+      />
+      <text x="70" y="400">luminaceToAlpha</text>
+    </svg>
+  </body>
+</html>
