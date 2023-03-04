@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>defs 元素</title>
+  </head>
+  <body>
+    <p>
+      &lt;defs&gt; 元素用来存储一个将会在之后用到的 图形化对象，在 defs
+      元素内部创建的对象不会立刻被渲染，为了展示它们你必须得使用引用（比如 use
+      元素等）
+    </p>
+
+    <svg viewBox="0 0 100 100">
+      <defs>
+        <circle id="myCircle" cx="0" cy="0" r="5" />
+
+        <linearGradient id="myGradient" gradientTransform="rotate(90)">
+          <stop offset="20%" stop-color="gold" />
+          <stop offset="90%" stop-color="red" />
+        </linearGradient>
+      </defs>
+
+      <!-- 使用图形化的对象 -->
+      <use x="5" y="5" href="#myCircle" fill="url(#myGradient)" />
+    </svg>
+  </body>
+</html>

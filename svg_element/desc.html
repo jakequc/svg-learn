@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>desc element</title>
+  </head>
+  <body>
+    <p>
+      &lt;desc&gt; 元素提供了一个访问性，使用长文字来描述 任意的 svg
+      容器元素或者图形化的元素 在 &lt;desc&gt; 中的元素不会作为
+      图形的一部分渲染出来，如果要渲染出来可以使用 text，如果使用了
+      aria-describedby 属性，那么 aria-describedby 优先级高于 desc 元素
+    </p>
+
+    <svg viewBox="0 0 100 100">
+      <circle cx="5" cy="5" r="4">
+        <desc>
+          这是用来描述 circle 的，你当然看不到它，因为这个不会作为 circle
+          的一部分渲染到 page 中
+        </desc>
+      </circle>
+    </svg>
+  </body>
+</html>
