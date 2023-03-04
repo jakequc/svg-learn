@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>svg 中的 a 标签</title>
+    <style>
+      /* 如果只选择 svg 中的 a 标签，需要给 svg 添加 namespace，防止选中 HTML 中的 a 元素 */
+      @namespace svg url(http://www.w3.org/2000/svg);
+      /* Necessary to select only SVG <a> elements, and not also HTML's.
+   See warning below */
+
+      /* 表示作用于 svg 下的 a:link */
+      svg|a:link,
+      svg|a:visited {
+        cursor: pointer;
+      }
+
+      svg|a {
+        /* svg 下的 a 的填充色 为  violet(紫罗兰) */
+        fill: violet; /* Even for text, SVG uses fill over color */
+        text-decoration: underline;
+      }
+
+      svg|a:hover,
+      svg|a:active {
+        outline: dotted 1px blue;
+      }
+
+      /* 这是作用于 HTML 下的所有 a 标签 */
+      a {
+        color: #f00;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#">html's a tag</a>
+    <br />
+    <p>
+      &lt;a&gt; 元素同 HTML 中的 a 元素，用来创建一个超链接 SVG 中的 &lt;a&gt;
+      元素可以是一个容器，你可以使用它来包裹任意的图形
+    </p>
+    <a href="#">html's a tag2</a>
+
+    <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+      <!-- a link around a shape -->
+      <a href="https://www.baidu.com">
+        <circle cx="50" cy="40" r="35" fill="transparent" stroke="green" />
+      </a>
+      <line x1="0" y1="76" x2="300" y2="76" stroke="orange" stroke-width="3" />
+      <!-- a link around a text -->
+      <a href="https://www.baidu.com" hreflang="hreflang">
+        <text x="50" y="90" text-anchor="middle">baidu.com</text>
+      </a>
+    </svg>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SVG - animate 元素</title>
+  </head>
+  <body>
+    <div>&lt;animate&gt; 随着时间推移，提供了一个动画方法</div>
+    <p></p>
+    <svg
+      width="300"
+      height="300"
+      viewBox="0 0 10 10"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect fill="violet" width="10" height="10">
+        <!-- 
+          attributeName 指定动画的属性名字
+          dur [duration] 指定动画持续的时间
+          repeatCount 重复的次数
+          values 决定了一组动画列表的值，被指定的时候 任何 from，to，by 属性值将会被忽略
+        -->
+        <animate
+          attributeName="rx"
+          values="0;5;0"
+          dur="10s"
+          repeatCount="indefinite"
+        />
+      </rect>
+    </svg>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<?xml version="1.0" standalone="no"?>
+<!-- 定义一个字体： 从 携带 id 属性 的 font 元素开始，使得它能够通过一个 URI 被引用 -->
+<!-- 属性 horiz-adv-x 定义了相比单一字形的路径定义，一个字符的平均宽度。值 1000 设置了一个起作用的合理值，有一些陪同的属性，帮助进一步定义基本的字形盒布局 -->
+<font id="Font1" horiz-adv-x="1000">
+    <!-- 
+        font-face 元素 在 svg 等等同于 CSS 中的 @font-face 声明，它定义了最终字体的基本属性
+        比如 weight, style 等等 font-family 后面 的 CSS 和 SVG font-family 属性可以引用它的值
+
+        属性 font-weight 和 font-style 跟 CSS 中的描述符有同样的目的，所有后面的属性都是字体布局引擎的呈现指令
+     -->
+    <font-face font-family="Super Sans" font-weight="bold" font-style="normal" units-per-em="1000"
+        cap-height="600" x-height="400" ascent="700" descent="300"
+        alphabetic="0" mathematical="350" ideographic="400" hanging="500">
+        <!-- 
+            font-face-src 相当于 CSS 的 @font-face 描述符中的 src 描述 
+            可以利用它的子元素 font-face-name 和 font-face-uri 把字体声明指向外源
+            示例表达了如果渲染器 有一个名为 Super Sans Bold 的本地字体可用，它将使用这个本地字体
+        -->
+        <font-face-src>
+            <font-face-name name="Super Sans Bold" />
+        </font-face-src>
+    </font-face>
+    <!-- missing-glyph 定义 表示如果特定的字形在字体中找不到，
+        而且也没有毁掉机制的话，
+        该如何显示，它同时还显示了如何创建字形： 在里边可以添加任何一个图形化 SVG 内容
+        这里可以使用任何其他的 SVG 元素，设置是 filter、a、script 元素
+    -->
+    <missing-glyph>
+        <path d="M0,0 h 200 v200 h-200 z" />
+    </missing-glyph>
+    <!-- 真正的字形是用 glyph 元素定义的，它最重要的属性是 unicode，它定义了一个表达这个字形的 unicode 代码点
+    如果你在一个字形上指定了 lang 属性，你可以更进一步专门限定它为特定的语言，由目标上的 xml:lang 属性表达
+    -->
+    <glyph unicode="!" horiz-adv-x="300">
+        <!-- Outline of exclam. pt. glyph -->
+    </glyph>
+    <glyph unicode="@">
+        <!-- Outline of @ glyph -->
+    </glyph>
+    <!-- glyphs: 符号, 点符 -->
+    <!-- more glyphs -->
+</font>
